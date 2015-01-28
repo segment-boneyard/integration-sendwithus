@@ -22,7 +22,7 @@ describe('Sendwithus', function(){
   it('should have the correct settings', function(){
     test
       .name('Sendwithus')
-      .channels(['server'])
+      .channels(['client', 'server', 'mobile'])
       .ensure('settings.apiKey')
       .ensure('settings.integrationId')
       .retries(10);
