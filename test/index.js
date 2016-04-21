@@ -2,6 +2,7 @@
 var Test = require('segmentio-integration-tester');
 var Sendwithus = require('../');
 var mapper = require('../lib/mapper');
+var Track = require('segmentio-facade').Track;
 
 describe('Sendwithus', function(){
   var sendwithus;
@@ -9,10 +10,8 @@ describe('Sendwithus', function(){
   var test;
 
   beforeEach(function(){
-    //settings = { apiKey: 'key_segment1234abcd', integrationId: 'sio_segment1234abcd' };
     settings = {
       apiKey: 'live_7252c5d59aa9c0ed65239cce083ea7e5f0505f0f',
-      //apiKey: 'test_514d7517342c583abf9b73a617a529897014411a',
       integrationId: 'sio_MA2T2LtHDvsNDjDke7aC6Q' };
     sendwithus = new Sendwithus(settings);
     test = Test(sendwithus, __dirname);
@@ -25,6 +24,7 @@ describe('Sendwithus', function(){
       .channels(['client', 'server', 'mobile'])
       .ensure('settings.apiKey')
       .ensure('settings.integrationId')
+      .ensure('message.userId')
       .retries(10);
   });
 
@@ -32,11 +32,18 @@ describe('Sendwithus', function(){
     it('should not be valid without an api key', function(){
       delete settings.apiKey;
       delete settings.invalid;
-      test.invalid({}, settings);
+      var msg = new Track({ userId: 'arbitor' });
+      test.invalid(msg, settings);
     });
 
     it('should be valid with complete settings', function(){
-      test.valid({}, settings);
+      var msg = new Track({ userId: 'dark archon' });
+      test.valid(msg, settings);
+    });
+
+    it('should not accept calls without userId', function(){
+      var msg = new Track({});
+      test.invalid(msg, settings);
     });
   });
 

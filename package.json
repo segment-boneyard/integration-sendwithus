@@ -22,6 +22,7 @@
     "ms": "0.x",
     "segmentio-integration-tester": "1.x",
     "should": "4.x",
-    "unix-time": "1.x"
+    "unix-time": "1.x",
+    "segmentio-facade": "2.x"
   }
 }
