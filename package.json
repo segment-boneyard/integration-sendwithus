@@ -1,6 +1,6 @@
 {
   "name": "@segment/integration-sendwithus",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Sendwithus server-side integration",
   "author": "Segment <friends@segment.com>",
   "repository": {
